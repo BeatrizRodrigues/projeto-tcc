@@ -52,9 +52,10 @@ exports.threshold = async (imageBase64, thresh, maxval, type) => {
 
   const canvas = createCanvas(src.width, src.height);
   cv.imshow(canvas, dst);
-  writeFileSync('outputThreshold.jpg', canvas.toBuffer('image/jpeg'));
+  var img = canvas.toDataURL("image");
   src.delete();
   dst.delete();
+  return img;
 
 }
 
@@ -102,9 +103,10 @@ exports.adaptiveThreshold = async (imageBase64, valMax, adaptiveMethod, type, bl
 
   const canvas = createCanvas(src.width, src.height);
   cv.imshow(canvas, dst);
-  writeFileSync('outputAdaptiveThreshold.jpg', canvas.toBuffer('image/jpeg'));
+  var img = canvas.toDataURL("image");
   src.delete();
   dst.delete();
+  return img;
 
 }
 

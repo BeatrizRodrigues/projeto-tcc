@@ -36,9 +36,10 @@ exports.resize = async (imageBase64, size1, size2, fx, fy, type) => {
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputresize.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 

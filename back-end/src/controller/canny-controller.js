@@ -6,10 +6,9 @@ module.exports = {
         try{
             const { imageBase64, threshold1, threshold2, apertureSize, gradientL2 } = req.body;
 
-            const dstResult = await repository.canny(imageBase64, threshold1, threshold2, apertureSize, gradientL2);
+            await repository.canny(imageBase64, threshold1, threshold2, apertureSize, gradientL2);
 
-            console.log(dstResult);
-            return res.status(201).json(dstResult);
+            return res.status(201).json("Feito");
         } catch(e){
             return res.status(400).json({ message: e.message });
         }

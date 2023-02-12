@@ -51,9 +51,10 @@ exports.sobel = async (imageBase64, dx, dy, ksize, scale, delta, borderType) => 
     
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputresobel.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -104,9 +105,10 @@ exports.scharr = async (imageBase64, dx, dy, scale, delta, borderType) => {
     
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputrescharr.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -157,9 +159,10 @@ exports.laplacian = async (imageBase64, ksize, scale, delta, borderType) => {
     
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputrelaplacian.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 

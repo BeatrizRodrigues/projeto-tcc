@@ -51,9 +51,10 @@ exports.filter2D = async (imageBase64, size1, size2, point1, point2, delta, type
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputfilter2D.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -105,9 +106,10 @@ exports.blur = async (imageBase64, size1, size2, point1, point2, type) => {
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputblur.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -159,9 +161,10 @@ exports.boxFilter = async (imageBase64, size1, size2, point1, point2, ddepth, no
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputboxFilter.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -212,9 +215,10 @@ exports.GaussianBlur = async (imageBase64, size1, size2, sigmaX, sigmaY, type) =
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputGaussianBlur.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -235,9 +239,10 @@ exports.medianBlur = async (imageBase64, ksize) => {
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputmedianBlur.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -288,9 +293,10 @@ exports.bilateralFilter = async (imageBase64, d, sigmaColor, sigmaSpace, borderT
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputbilateralFilter.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 

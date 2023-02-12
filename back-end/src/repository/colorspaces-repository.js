@@ -1,7 +1,8 @@
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
-const { writeFileSync } = require('fs');
+const { writeFileSync, existsSync, mkdirSync } = require('fs');
 const { Canvas, createCanvas, Image, ImageData, loadImage } = require('canvas');
+const Jimp = require('jimp');
 
 exports.cvtColor = async (imageBase64, code, dstCn) => {
 
@@ -13,59 +14,56 @@ exports.cvtColor = async (imageBase64, code, dstCn) => {
 
   const imagem = await loadImage('inst.jpg');
   const src = cv.imread(imagem);
+
   let dst = new cv.Mat();
 
-  if (src) {
-
-    if (code = 'COLOR_RGB2RGBA') {
-      cv.cvtColor(src, dst, cv.COLOR_RGB2RGBA, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGBA2RGB') {
-      cv.cvtColor(src, dst, cv.COLOR_RGBA2RGB, parseInt(dstCn));
-    }
-    if (code = 'COLOR_BGR2RGBA') {
-      cv.cvtColor(src, dst, cv.COLOR_BGR2RGBA, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGB2BGRA') {
-      cv.cvtColor(src, dst, cv.COLOR_RGB2BGRA, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGBA2BGR') {
-      cv.cvtColor(src, dst, cv.COLOR_RGBA2BGR, parseInt(dstCn));
-    }
-    if (code = 'COLOR_BGR2RGB') {
-      cv.cvtColor(src, dst, cv.COLOR_BGR2RGB, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGB2BGR') {
-      cv.cvtColor(src, dst, cv.COLOR_RGB2BGR, parseInt(dstCn));
-    }
-    if (code = 'COLOR_BGR2GRAY') {
-      cv.cvtColor(src, dst, cv.COLOR_BGR2GRAY, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGB2GRAY') {
-      cv.cvtColor(src, dst, cv.COLOR_RGB2GRAY, parseInt(dstCn));
-    }
-    if (code = 'COLOR_RGBA2GRAY') {
-      cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, parseInt(dstCn));
-    }
-    if (code = 'COLOR_GRAY2BGR') {
-      cv.cvtColor(src, dst, cv.COLOR_GRAY2BGR, parseInt(dstCn));
-    }
-    if (code = 'COLOR_GRAY2RGB') {
-      cv.cvtColor(src, dst, cv.COLOR_GRAY2RGB, parseInt(dstCn));
-    }
-    if (code = 'COLOR_GRAY2RGBA') {
-      cv.cvtColor(src, dst, cv.COLOR_GRAY2RGBA, parseInt(dstCn));
-    }
-  } else{
-    console.log("imagem nula")
+  if (code = 'COLOR_RGB2RGBA') {
+    cv.cvtColor(src, dst, cv.COLOR_RGB2RGBA, dstCn);
   }
-
+  if (code = 'COLOR_RGBA2RGB') {
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2RGB, dstCn);
+  }
+  if (code = 'COLOR_BGR2RGBA') {
+    cv.cvtColor(src, dst, cv.COLOR_BGR2RGBA, dstCn);
+  }
+  if (code = 'COLOR_RGB2BGRA') {
+    cv.cvtColor(src, dst, cv.COLOR_RGB2BGRA, dstCn);
+  }
+  if (code = 'COLOR_RGBA2BGR') {
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2BGR, dstCn);
+  }
+  if (code = 'COLOR_BGR2RGB') {
+    cv.cvtColor(src, dst, cv.COLOR_BGR2RGB, dstCn);
+  }
+  if (code = 'COLOR_RGB2BGR') {
+    cv.cvtColor(src, dst, cv.COLOR_RGB2BGR, dstCn);
+  }
+  if (code = 'COLOR_BGR2GRAY') {
+    cv.cvtColor(src, dst, cv.COLOR_BGR2GRAY, dstCn);
+  }
+  if (code = 'COLOR_RGB2GRAY') {
+    cv.cvtColor(src, dst, cv.COLOR_RGB2GRAY, dstCn);
+  }
+  if (code = 'COLOR_RGBA2GRAY') {
+    cv.cvtColor(src, dst, cv.COLOR_RGBA2GRAY, dstCn);
+  }
+  if (code = 'COLOR_GRAY2BGR') {
+    cv.cvtColor(src, dst, cv.COLOR_GRAY2BGR, dstCn);
+  }
+  if (code = 'COLOR_GRAY2RGB') {
+    cv.cvtColor(src, dst, cv.COLOR_GRAY2RGB, dstCn);
+  }
+  if (code = 'COLOR_GRAY2RGBA') {
+    cv.cvtColor(src, dst, cv.COLOR_GRAY2RGBA, dstCn);
+  }
 
   const canvas = createCanvas(src.width, src.height);
   cv.imshow(canvas, dst);
-  writeFileSync('outputCvtColor.jpg', canvas.toBuffer('image/jpeg'));
+  // writeFileSync('outputCvtColor.jpg', canvas.toBuffer('image/jpeg'));
+  var img = canvas.toDataURL("image");
   src.delete();
   dst.delete();
+  return img;
 
 };
 
@@ -89,25 +87,12 @@ exports.inRange = async (imageBase64) => {
 
   const canvas = createCanvas(src.width, src.height);
   cv.imshow(canvas, dst);
-  writeFileSync('outputInRange.jpg', canvas.toBuffer('image/jpeg'));
+  //writeFileSync('outputInRange.jpg', canvas.toBuffer('image/jpeg'));
+  var img = canvas.toDataURL("image");
   src.delete();
   dst.delete();
-
+  return img;
 };
-
-function getBase64Image(img) {
-  var canvas = document.createElement("canvas");
-  canvas.width = img.width;
-  canvas.height = img.height;
-  var ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  var dataURL = canvas.toDataURL("image/png");
-  return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-
-  var texto = '{ "imagem" : { ' +
-    '"nomeArquivo": "imagem.png", ' +
-    '"base64": ' + dataURL + ' } }';
-}
 
 function loadOpenCV() {
   return new Promise(resolve => {

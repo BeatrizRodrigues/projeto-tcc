@@ -18,9 +18,10 @@ module.exports = {
         try {
             const { imageBase64, valMax, adaptiveMethod, type, blockSize, c } = req.body;
 
-            await repository.adaptiveThreshold(imageBase64, valMax, adaptiveMethod, type, blockSize, c);
+            const imagem = await repository.adaptiveThreshold(imageBase64, valMax, adaptiveMethod, type, blockSize, c);
 
-            return res.status(201).json("Feito");
+            return res.status(201).json(imagem);
+            
         } catch (error) {
             return res.status(400).json({ message: error.message });
         }

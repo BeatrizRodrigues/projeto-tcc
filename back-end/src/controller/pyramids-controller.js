@@ -5,9 +5,9 @@ module.exports = {
         try {
             const { imageBase64, x, y, borderType } = req.body;
 
-            await repository.pyrUp(imageBase64, x, y, borderType);
+            const imagem = await repository.pyrUp(imageBase64, x, y, borderType);
 
-            return res.status(201).json("Feito");
+            return res.status(201).json(imagem);
         } catch (e) {
             return res.status(400).json({ message: e.message });
         }
@@ -17,9 +17,9 @@ module.exports = {
         try {
             const { imageBase64, x, y, borderType } = req.body;
 
-            await repository.pyrDown(imageBase64, x, y, borderType);
+            const imagem = await repository.pyrDown(imageBase64, x, y, borderType);
 
-            return res.status(201).json("Feito");
+            return res.status(201).json(imagem);
         } catch (e) {
             return res.status(400).json({ message: e.message });
         }

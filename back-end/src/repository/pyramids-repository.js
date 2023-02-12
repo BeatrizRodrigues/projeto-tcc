@@ -49,9 +49,10 @@ exports.pyrUp = async (imageBase64, x, y, borderType) => {
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputpyrUp.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -96,9 +97,10 @@ exports.pyrDown = async (imageBase64, x, y, borderType) => {
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputpyrDown.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 

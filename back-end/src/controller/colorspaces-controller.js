@@ -8,7 +8,7 @@ module.exports = {
 
             await repository.cvtColor(imageBase64, code, dstCn);
 
-            return res.status(201).json("Feito");
+            return res.status(201).json("feito");
         } catch(e){
             return res.status(400).json({ message: e.message });
         }
@@ -18,8 +18,9 @@ module.exports = {
         try {
             const { imageBase64 } = req.body;
 
-            await repository.inRange(imageBase64);
-            return res.status(201).json("Feito");
+            const imagem = await repository.inRange(imageBase64);
+            
+            return res.status(201).json(imagem);
 
         } catch(err) {
             return res.status(400).json({ message: err.message });

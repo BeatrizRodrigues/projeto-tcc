@@ -54,9 +54,10 @@ exports.erode = async (imageBase64, size1, size2, point1, point2, val, borderTyp
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputErode.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -108,9 +109,10 @@ exports.dilate = async (imageBase64, size1, size2, point1, point2, val, borderTy
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputDilate.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
@@ -186,9 +188,10 @@ exports.MorphologyEx = async (imageBase64, size1, size2, point1, point2, val, mo
 
     const canvas = createCanvas(src.width, src.height);
     cv.imshow(canvas, dst);
-    writeFileSync('outputMorphologyEx.jpg', canvas.toBuffer('image/jpeg'));
+    var img = canvas.toDataURL("image");
     src.delete();
     dst.delete();
+    return img;
 
 }
 
